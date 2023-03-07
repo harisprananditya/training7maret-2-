@@ -1,0 +1,175 @@
+<!-- form view-->
+<record id = 'training_course_view_form' model = 'ir.ui.view'>
+	<field name = 'name'>training.form</field>
+	<field model = 'model'>training.module</field>
+	<field arch = 'arch' type='xml'>
+		<form>
+			<sheet>
+				<label for='name'/>
+				<h1>
+					<field name = "name"/>
+				</h1>
+				<group> 
+					<group>
+						<field name="data"/>
+						<field state="state"/>
+					</group>
+					<group>
+						<field total_attendees = 'total_attendees'/>
+						<registration_amount = 'total_attendees'/>
+					</group>
+				</group>
+				<field name='description'/>
+			<sheet>
+		<from>
+	<field>
+</record>
+
+<!-- tree view-->
+
+<record id = "training_course_view_tree" model = 'ir.ui.view'>
+	<field name = 'name'> training.tree</field>
+	<field model = 'model' >training.module </field>
+	<field arch = 'arch' type='xml'>
+			<tree>
+				<field name='name'/>
+				<field date='date'/>
+				<field total_attendees='total_attendees'/>
+				<field registration_amount='registration_amount'/>
+				<field state='state'/>
+			</tree>
+		</field>
+	</record>
+
+<!-- action window-->
+
+<record id = "action_training_view" model = 'ir.ui.view'>
+	<field name ="name">Training</field>
+	<field name ='type' ></field> 
+	<field name =  'res_model'></field> 
+	<field name = 'view_mode'></field>
+	<field name ='help' type = 'html'>
+		<p>
+			Add a new Training
+		</p>
+	</field>
+</record>
+
+<!-- Menuitem-->
+
+<menuitem id='training_menu_root' name ='Training'/>
+<menuitem id='training_menu' name='Training' action='action_training_view'parent='training_menu_root' />
+
+<!-- Create One2many Field-->
+
+<notebook>
+	<page>
+		<field>
+			<tree>
+					<field name ="attendee_id"/>
+					<field name = "presence"/>
+			</tree>
+		</field>
+	</page>
+</notebook>
+
+<!-- Create many2many Field-->
+<group>
+	<field name = 'date'/>
+	<field name = 'trainer_id'/>
+	<field name = 'assistant_ids'/>
+	<field name = 'state'/>
+</group>
+
+<field name = 'attendees_ids'>
+	<tree>
+		<field name = 'attendee_id'/>
+		<field name = 'phone'/>
+		<field name = 'presence'/>  
+	</tree>
+</field>
+
+
+<!-- kanban -->
+
+<record>
+	<field name = 'name'>training.module</field>
+	<field name = 'model'>training.module</field>
+	<field name = 'arch' type = 'xml'>
+		<kanban>
+			<template>
+				<t t-name = 'kanban-box'>
+					<div class = 'row'>
+						<div t-if='record.name.value' class= 'col-6 text-center'>
+							<strong>Name</strong>
+						</div>
+						<div t-if='record.trainer.id.value' class= 'col-6 text-center'>
+							<strong>Trainer</strong>
+						</div>
+						<div t-if='record.name.value' class= 'col-6 text-center'>
+							<field name = 'name'/>
+						</div>
+						<div t-if='record.trainer.id.value' class= 'col-6 text-center'>
+							<field name = 'trainer_id'/>
+						</div>
+					</div>
+				</t>
+			</template>
+		</kanban>
+	</field>
+</record>
+
+
+<field name = 'view_mode'>tree,form,kanban</field>
+
+
+<!-- calendar -->
+
+<record model = 'ir.ui.view' id = 'training_course_view_calendar'>
+	<field name = 'name'>training.module.calendar</field>
+	<field name = 'model'>training.module</field>
+	<field name = 'arch' type ='xml'>
+		<calendar string='Scheduled' date_start = 'date'>
+			<field name = 'name'/>
+			<field anem = 'trainer_id'/>
+		</calendar>
+	</field>
+</record>
+
+<field name = 'view_mode'>tree,form,kanban,calendar</field>
+
+<!-- graph view -->
+
+<record id = 'training_course_view_graph' model = 'ir.ui.view'>
+	<field name = 'name'>training.module.graph</field>
+	<field name = 'model'> </field>
+	<field name = 'arch' type = 'xml'>
+		<graph string 'Training'>
+			<field name = 'name'/>
+			<field name  = 'total_attendees' type ='measure'/>
+		</graph>
+	</field>
+</record>
+
+<!-- inherit view -->
+<record id = 'training_course_res_users_inherit' model ='ir.ui.view'>
+	<field name = 'name'>res.users.inherit</field>
+	<field name = ''>res.users</field>
+	<field name = 'inherit_id' ref='base_view_users_form'/>
+	<field name ='arch' type = 'xml'>
+		<xpath expr = '//form/sheet/notebook' position = 'inside'>
+			<page string = 'Training'>
+				<field name = 'training_ids'/>
+			</page>
+		</xpath>
+	</field>
+</record>
+
+
+<!--test
+
+dasdas
+
+sdasdasdasda
+-->
+dasdasdsada
