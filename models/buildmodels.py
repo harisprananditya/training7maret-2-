@@ -21,7 +21,7 @@ class TrainingAttendees(models.Model):
 	
 	_name= 'training.attendees'
 	_description= 'Training Attendees'
-	attendee.id= fields.Many2one('res.partner', string ='Attendee')
+	attendee_id= fields.Many2one('res.partner', string ='Attendee')
 	presence= fields.Boolean(string='Presence')
 	training_id= fields.Many2one('training.module', string='Training')
 	#create one2many fields
